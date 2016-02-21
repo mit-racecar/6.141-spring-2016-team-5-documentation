@@ -1,16 +1,17 @@
-name: Your New Jekyll Site
-description: Blogging about stuffs
-meta_description: "Your New Jekyll Site, Blogging about stuffs"
+name: "MIT 6.141 Team 5 Project Blog"
+description: "For MIT's Robotics: Science & Systems class"
+meta_description: "MIT 6.141 Team 5 Project Blog"
 
 markdown: kramdown
 highlighter: pygments
 logo: false
 paginate: 15
 baseurl: ''
-domain_name: 'http://yourblog-domain.com'
-google_analytics: 'UA-XXXXXXXX-X'
+domain_name: 'https://github.mit.edu/pages/rss2016-team5/'
 gems: [jekyll-paginate]
 
 # Details for the RSS feed generator
 url:            'blog url'
-author:         'Your Name'
+author:         'Team 5'
+
+xcerpt_separator: <!--more-->
