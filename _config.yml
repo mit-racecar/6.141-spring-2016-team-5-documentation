@@ -13,6 +13,6 @@ gems: [jekyll-paginate]
 # Details for the RSS feed generator
 url:            'blog url'
 author:         'Team 5'
-author_bio:     "MIT's 6.141 Team 5 is driven by the following motley assortment of undergraduate student hackers, coders, and EE wizards:\n Eric Wieser, Ernie Ho, Shi-Ke Xue, Miles Steele, Steven Homberg, and Winter Guerra."
+author_bio:     "MIT's 6.141 Team 5 is driven by the following motley assortment of undergraduate student hackers, coders, and EE wizards:<br>Eric Wieser, Ernie Ho, Shi-Ke Xue, Miles Steele, Steven Homberg, and Winter Guerra."
 
 xcerpt_separator: <!--more-->
