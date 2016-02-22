@@ -6,8 +6,8 @@ markdown: kramdown
 highlighter: pygments
 logo: false
 paginate: 15
-baseurl: ''
-domain_name: 'https://github.mit.edu/pages/rss2016-team5/'
+baseurl: '/pages/rss2016-team5'
+domain_name: 'https://github.mit.edu'
 gems: [jekyll-paginate]
 
 # Details for the RSS feed generator
