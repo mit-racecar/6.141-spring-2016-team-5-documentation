@@ -3,7 +3,7 @@ layout:     post
 title:      "Lab 2B Writeup"
 date:       2016-02-17 19:45:48.740
 categories: writeups
-cover:      lab2b-laser-sim.jpg
+cover:      /assets/images/lab2b-laser-sim.jpg
 ---
 
 Lab 2B was focused on setting up the team's tools and environment in order to effectively develop software for the robot.  Several tasks involved setting up the software development environment on the user end in order to facilitate communication, and code-sharing between team members and with the staff, while others involved setting up the software on the physical robot in order to work correctly.
