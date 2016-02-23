@@ -3,7 +3,10 @@ description: "For MIT's Robotics: Science & Systems class"
 meta_description: "MIT 6.141 Team 5 Project Blog"
 
 markdown: kramdown
-highlighter: pygments
+kramdown:
+  input: GFM
+
+highlighter: rouge
 logo: false
 paginate: 15
 baseurl: '/pages/rss2016-team5'
@@ -15,4 +18,4 @@ url:            'blog url'
 author:         'Team 5'
 author_bio:     "MIT's 6.141 Team 5 is driven by the following motley assortment of undergraduate student hackers, coders, and EE wizards:<br>Eric Wieser, Ernie Ho, Shi-Ke Xue, Miles Steele, Steven Homberg, and Winter Guerra."
 
-xcerpt_separator: <!--more-->
+excerpt_separator: <!--more-->

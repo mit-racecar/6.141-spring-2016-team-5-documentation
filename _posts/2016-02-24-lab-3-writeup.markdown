@@ -2,40 +2,39 @@
 layout:     post
 title:      "Lab 3 Writeup"
 categories: writeups
-cover:      /assets/images/lab3-point-clouds.jpg
 published:  false
+cover:      /assets/images/lab3-point-clouds.png
 ---
 
-# A simpler ROS API
+<!--more-->
+
+## A simpler ROS API
 
 ```python
 from rospyext import *
 
 class ObjectDetectorNode(Node):
-    pub_detect = Publisher('/object_detection', Bool, queue_size=10)
-
-    distance_thresh  = Param(float, default=1)
+    pub_detect = Publisher('/object_detection', Bool)
+    distance_thresh = Param(float, default=1)
 
     @Subscriber('/laser/scan', LaserScan)
     def sub_scan(self, scan):
-    	detected = ...
-
-        # process scan data
+        detected = min(scan) < self.distance_thresh
         self.pub_detect.publish(detected)
-
 ```
 
-# Estimation
-## Splitting the scans
+## Estimation
 
-![](/assets/images/lab3-point-clouds.jpg)
+### Splitting the scans
 
-## Wall and object detection
+![]({{ site.baseurl }}/assets/images/lab3-point-clouds.png)
 
-
-# Control
+### Wall and object detection
 
 
-# Results
+## Control
+
+
+## Results
 
 <!-- [Here's a link to our lab presentation slide deck](). -->
