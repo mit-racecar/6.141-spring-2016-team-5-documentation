@@ -1,0 +1,41 @@
+digraph graphname {
+	graph [
+		compound=True,
+		rank=same,
+		rankdir=LR,
+		ranksep=0.2
+	];
+	node [label="\N"];
+	_wall_follow_object_detector_node	 [URL=_wall_follow_object_detector_node,
+		height=0.5,
+		label="/wall_follow/object_detector_node",
+		shape=ellipse,
+		width=3.7191];
+	_wall_follow_driver_node	 [URL=_wall_follow_driver_node,
+		height=0.5,
+		label="/wall_follow/driver_node",
+		shape=ellipse,
+		width=2.7984];
+	_wall_follow_object_detector_node -> _wall_follow_driver_node	 [URL=topic_3A_tokyo_object_detection,
+		label="/tokyo/object_detection",
+		penwidth=1];
+	_wall_follow_scan_parser_node	 [URL=_wall_follow_scan_parser_node,
+		height=0.5,
+		label="/wall_follow/scan_parser_node",
+		shape=ellipse,
+		width=3.358];
+	_wall_follow_scan_parser_node -> _wall_follow_object_detector_node	 [URL=topic_3A_tokyo_laser_scan_front,
+		label="/tokyo/laser/scan/front",
+		penwidth=1];
+	_wall_follow_right_wall_detector	 [URL=_wall_follow_right_wall_detector,
+		height=0.5,
+		label="/wall_follow/right_wall_detector",
+		shape=ellipse,
+		width=3.5205];
+	_wall_follow_scan_parser_node -> _wall_follow_right_wall_detector	 [URL=topic_3A_tokyo_laser_scan_right,
+		label="/tokyo/laser/scan/right",
+		penwidth=1];
+	_wall_follow_right_wall_detector -> _wall_follow_driver_node	 [URL=topic_3A_tokyo_wall_detection_right,
+		label="/tokyo/wall_detection/right",
+		penwidth=1];
+}
