@@ -48,10 +48,10 @@ We decided to solve this by writing a wrapper for some of `rospy`’s key functi
 
 ```python
 class ObjectDetectorNodeBefore(object):
-    def __init__(sefl):
+    def __init__(self):
         self.pub_detect = Publisher('/object_detection', Bool)
         Subscriber('/laser/scan', LaserScan, self.sub_scan)
-        self.distance_param = rospy.get_param(‘~distance_thresh’, 1)
+        self.distance_param = rospy.get_param('~distance_thresh', 1)
 
     def sub_scan(self, scan):
         detected = min(scan) < self.distance_thresh
