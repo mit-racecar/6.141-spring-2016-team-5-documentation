@@ -8,6 +8,10 @@
 	display:inline;
 }
 
+li img {
+	vertical-align: middle;
+}
+
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
 	"syntax"
