@@ -53,7 +53,13 @@ We construct two of these objects using a roslaunch file containing the followin
 The wall follower node implements a simple two-state proportional controller to follow a wall to its right at a fixed distance.  Given the input vector from the wall detector, it first extracts the distance and angle to the wall encoded in the point message.  Given some target distance and angle from the wall, the node multiplies each error by a gain constant and publishes the result to the racecar’s drive system as the angle component of the ackermann command message.  The target distance and angle as well as the gain constants are determined by the ROS parameter service.
 
 ### Safety Controller
-TODO
+
+Our `safety_controller_node` acts as a safe and transparent way of disabling robot movement when the robot has detected that an object has encroached closer than a specified safety margin from the front of the robot. To achieve this, our `safety_controller_node` uses topic remappings in the `roslaunch` file to filter all autonomous movement commands through the `safety_controller_node`. This `safety_controller` node subscribes to the minimum object distance output of the `front_wall_detector` node and, on every update from `front_wall_detector`, decides whether an object has encroached too close to the front of the robot. If an object has encroached too close to the front of the robot, the `safety_controller_node` will override all outgoing movement commands to the servos with a default `AckermannSteeringStamped` message that disables all driving movement.
+
+![Safety Controller Node Hookup Diagram]({{ site.baseurl }}/assets/images/lab3-safety_controller.png)
+
+The current version of the safety controller works well in simulation. However, since real-world sensor data is more noisy than simulated data, we have found that our robot tends to “dance” in the real world as artifacts encroach upon the virtual safety barrier. This will be fixed in version 2 of the safety controller by filtering the laserscan input data to remove all obvious artifacts.
+
 
 ## Putting it all together
 
@@ -98,6 +104,5 @@ Our approach to being able to run the same node code in the simulator as on the 
 
 ## Open source contributions
 
-* ![](https://github-shields.com/github/ros/ros_comm/pull/743.svg) - Fixes to `rospy.numpy_msg` 
+* ![](https://github-shields.com/github/ros/ros_comm/pull/743.svg) - Fixes to `rospy.numpy_msg`
 * ![](https://github-shields.com/github/ros-visualization/rqt_common_plugins/pull/354.svg) - Fixes to rqt node graph
-
