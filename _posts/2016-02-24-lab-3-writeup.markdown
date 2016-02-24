@@ -83,6 +83,7 @@ class ObjectDetectorNodeBefore(object):
         detected = min(scan) < self.distance_thresh
         self.pub_detect.publish(detected)
 ```
+
 They look like this:
 
 ```python
