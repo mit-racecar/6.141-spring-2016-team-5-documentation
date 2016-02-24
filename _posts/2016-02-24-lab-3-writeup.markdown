@@ -31,7 +31,7 @@ The object detector looks at the laser scan from the front of the robot to check
 
 ### Wall Detector
 
-The wall detector detects the nearest point to the obstacle from scanner data, and publishes the location of this point in cartesian space, relative to the frame of the robot. In the future it will also include the angle of the wall.
+The wall detector detects the nearest point to the obstacle in trimmed scanner data from the right side, publishing the location of this point in cartesian space relative to the frame of the robot.  The desired quantities of angle and range to the wall are approximated by the angle and range of this shortest beam, recoverable from the cartesian coordinates simply by converting back to polar.
 
 We construct two of these objects using a roslaunch file containing the following:
 
@@ -54,12 +54,11 @@ The wall follower node implements a simple two-state proportional controller to 
 
 ### Safety Controller
 
-Our `safety_controller_node` acts as a safe and transparent way of disabling robot movement when the robot has detected that an object has encroached closer than a specified safety margin from the front of the robot. To achieve this, our `safety_controller_node` uses topic remappings in the `roslaunch` file to filter all autonomous movement commands through the `safety_controller_node`. This `safety_controller` node subscribes to the minimum object distance output of the `front_wall_detector` node and, on every update from `front_wall_detector`, decides whether an object has encroached too close to the front of the robot. If an object has encroached too close to the front of the robot, the `safety_controller_node` will override all outgoing movement commands to the servos with a default `AckermannSteeringStamped` message that disables all driving movement.
+Our `safety_controller_node` acts as a safe and transparent way of disabling robot movement when the robot has detected that an object has encroached closer than a specified safety margin from the front of the robot. To achieve this, our `safety_controller_node` works independently of our higher-level robot logic and outputs “STOP” commands to the robot’s servos through the output MUX when it detects that an object has encroached upon the safety barrier.
+
+To detect objects in front of the robot, the `safety_controller` node subscribes to the output of the `front_wall_detector` node and, on every update from `front_wall_detector`, decides whether an object has encroached too close to the front of the robot. If an object has encroached too close to the front of the robot, the `safety_controller_node` will override all outgoing movement commands to the servos with a default `AckermannSteeringStamped` message that disables all driving movement by using the `ackermann_cmd_mux/input/safety` topic which takes precedent on all other robot actuator commands.
 
 ![Safety Controller Node Hookup Diagram]({{ site.baseurl }}/assets/images/lab3-safety_controller.png)
-
-The current version of the safety controller works well in simulation. However, since real-world sensor data is more noisy than simulated data, we have found that our robot tends to “dance” in the real world as artifacts encroach upon the virtual safety barrier. This will be fixed in version 2 of the safety controller by filtering the laserscan input data to remove all obvious artifacts.
-
 
 ## Putting it all together
 
@@ -83,7 +82,6 @@ class ObjectDetectorNodeBefore(object):
         detected = min(scan) < self.distance_thresh
         self.pub_detect.publish(detected)
 ```
-
 They look like this:
 
 ```python
@@ -102,6 +100,8 @@ class ObjectDetectorNodeAfter(Node):
 We discovered that the topic names used by the simulator did not align with those used by the hardware. In particular many topics which are in `/racecar` in the simulator are in `/vesc` on the car. The most important of which so far is `/racecar/ackermann_cmd_mux/input/*`.
 
 Our approach to being able to run the same node code in the simulator as on the car with the least amount of manual tuning was to use remapping. Nodes use the simulator topic layout as canon, and a standard launch file `wall_follower_sim.launch` works in the simulator. For running on the car, a launch file `wall_follower_car.launch` first remaps the topics we use in `/vesc` and `/scan` to their `/racecar` equivalents and then includes `wall_follower_sim.launch`.
+
+Additionally, to get the simulator’s namespace to adhere as closely to the robot’s operating namespace, we also created a new Gazebo simulator launch file `racecar_tunnel_with_mux.launch` that also boots a `ackermann_cmd_mux` MUX under the `/racecar` namespace. Using this modified launch file, we can now post commands to `ackermann_cmd_mux/input/safety` and `ackermann_cmd_mux/input/navigation` and expect the simulated robot to prioritize these commands in the correct manner.
 
 ## Open source contributions
 
