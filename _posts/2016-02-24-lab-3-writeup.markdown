@@ -42,4 +42,4 @@ class ObjectDetectorNode(Node):
 ## Open source contributions
 
 * ![](https://github-shields.com/github/ros/ros_comm/pull/743.svg) - Fixes to `rospy.numpy_msg` 
-* ![](https://github-shields.com/github/ros-visualization/rqt_common_plugins/pull/354) - Fixes to rqt node graph
+* ![](https://github-shields.com/github/ros-visualization/rqt_common_plugins/pull/354.svg) - Fixes to rqt node graph
