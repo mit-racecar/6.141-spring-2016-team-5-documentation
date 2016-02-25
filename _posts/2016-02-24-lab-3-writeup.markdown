@@ -107,3 +107,5 @@ Additionally, to get the simulator’s namespace to adhere as closely to the rob
 
 * ![](https://github-shields.com/github/ros/ros_comm/pull/743.svg) - Fixes to `rospy.numpy_msg`
 * ![](https://github-shields.com/github/ros-visualization/rqt_common_plugins/pull/354.svg) - Fixes to rqt node graph
+
+Our presentation slides can be found [on google slides](https://docs.google.com/presentation/d/1XHG0e0SMnvZHWL35wB0ebjpf-7GNpNpY7OfzQ7E2a1w/edit?usp=sharing)
