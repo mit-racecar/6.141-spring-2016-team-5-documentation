@@ -8,6 +8,8 @@ cover:      /assets/images/lab3-point-clouds.png
 
 In this week's lab, the goal was to create a rudimentary pipeline for following a wall while checking for collisions in front. To accomplish this, we divided the task into natural functionality segments both to better organize our code structure as well as to add modularity for future functionality to build off of.  In addition, we continued to add infrastructure to make writing ROS code with good practices easier.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iGUTtHEP7PU" frameborder="0" allowfullscreen></iframe>
+
 <!--more-->
 
 ![our node graph]({{ site.baseurl }}/assets/images/lab3-rosgraph.dot.svg)
