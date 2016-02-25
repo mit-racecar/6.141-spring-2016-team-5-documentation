@@ -34,8 +34,16 @@
 
     $document.ready(function () {
 
-        var $postContent = $(".post-content");
-        $postContent.fitVids();
+        // Fit all videos for post content
+        // var $postContent = $(".post-content");
+        // $postContent.fitVids();
+
+        // Fit all videos everywhere
+        var body = $("body");
+        //include google docs/slides.
+        body.fitVids({ customSelector: "iframe[src^='https://docs.google.com']"});
+
+
 
         function updateImageWidth() {
             var $this = $(this),

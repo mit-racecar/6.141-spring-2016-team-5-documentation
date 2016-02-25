@@ -4,4 +4,4 @@ title:      "Lab 2b Slides"
 categories: slides
 ---
 
-<iframe src="https://docs.google.com/presentation/d/1uv5sRoH_Ll5dtq8-jLKJIxxPPaZvK0B958jsGzH6fNs/embed?start=false&loop=false&delayms=3000" width="100%" height="300" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<iframe src="https://docs.google.com/presentation/d/1uv5sRoH_Ll5dtq8-jLKJIxxPPaZvK0B958jsGzH6fNs/embed?start=false&loop=false&delayms=3000" width="960" height="569" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
