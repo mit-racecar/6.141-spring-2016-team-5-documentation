@@ -1,0 +1,7 @@
+---
+layout:     post
+title:      "Lab 4 Slides"
+categories: slides
+---
+
+<iframe src="https://docs.google.com/presentation/d/1AIFN7aqSJT-fPrvG_RfsXmefTlcpt-c8BFZLEIvi1tQ/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
