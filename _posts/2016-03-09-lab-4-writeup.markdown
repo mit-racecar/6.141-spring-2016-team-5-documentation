@@ -48,7 +48,7 @@ Using this data, there are a number of common options for building a classifier:
 - find a small set of planar classifiers - a set of planes which contain the region of color-space holding orange colors. This generalizes the above two options
 - Attempt to use machine learning to come up with non-linear classifiers
 
-A little more thought revealed a much simpler option - building a lookup table from color to orangeness. The following plots show the collected color data as voxels, where a voxel is filled if at least one of the samples of the cone falls inside it. Some thought must be put into choosing voxel sizes: too small, and the size of the lookup table might cause cache invalidation performance issues, and unless a very large amount of data is recorded, the tables will be sparse; too large, and the classifier will group non-orange colors with orange. We settled on a total of $8^3$ voxels.
+A little more thought revealed a much simpler option - building a lookup table from color to orangeness. The following plots show the collected color data as voxels, where a voxel is filled if at least one of the samples of the cone falls inside it. Some thought must be put into choosing voxel sizes: too small, and the size of the lookup table might cause cache invalidation performance issues, and unless a very large amount of data is recorded, the tables will be sparse; too large, and the classifier will group non-orange colors with orange. We settled on a total of $$8^3$$ voxels.
 
 ![plot of 6-bit voxels]({{ site.baseurl }}/assets/images/lab4/plot-6.png)
 ![plot of 3-bit voxels]({{ site.baseurl }}/assets/images/lab4/plot-3.png)
@@ -89,7 +89,7 @@ k\begin{bmatrix} p_x \\ p_y \\ 1 \end{bmatrix} =
 \begin{bmatrix} w_x \\ w_y \\ w_z \\ 1 \end{bmatrix}
 $$
 
-Where $w$ is the position in world space, and $p$ is the position in image space. The constant $k$ encapsulates the rules for homogeneous transformations.
+Where $$w$$ is the position in world space, and $$p$$ is the position in image space. The constant $$k$$ encapsulates the rules for homogeneous transformations.
 
 
 TODO
@@ -106,7 +106,7 @@ P
 \right)
 $$
 
-We find the 3D position by solving the following for $w$:
+We find the 3D position by solving the following for $$w$$:
 
 $$
 k\begin{bmatrix} p_x \\ p_y \\ 1 \\ 0\end{bmatrix} =
