@@ -2,6 +2,7 @@
 layout:     post
 title:      "Lab 4 Writeup"
 categories: writeups
+cover:      /assets/images/lab4/cover.jpg
 ---
 
 In this lab, the goal was to use the cameras on the racecar to navigate around a bright orange cone. This entailed writing computer vision code to identify the cone, and a controller to weave around the cones smoothly
