@@ -148,8 +148,11 @@ We find the 3D position by solving the following for $$w$$:
 $$
 k\begin{bmatrix} p_x \\ p_y \\ 1 \\ 0\end{bmatrix} =
 \begin{bmatrix}
-\multicolumn{4}{c}{P} \\
+P\\
+\hline
+\begin{matrix}
 0 & 0 & 1 & -\hat{w_z}
+\end{matrix}
 \end{bmatrix}
 \begin{bmatrix} w_x \\ w_y \\ w_z \\ 0\end{bmatrix}
 $$
