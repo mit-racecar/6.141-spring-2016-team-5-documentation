@@ -1,29 +1,19 @@
-digraph graphname {
+digraph lab4 {
 	graph [
 		compound=True,
 		rank=same,
 		rankdir=LR,
 		ranksep=0.2
 	];
-	node [label="\N"];
-	zed [
-		height=0.5,
-		label="/camera/zed/zed_wrapper_node",
-		shape=ellipse];
-	cone_thresholder [
-		height=0.5,
-		label="/lab4a/cone_thresholder",
-		shape=ellipse];
-	cone_locator [
-		height=0.5,
-		label="/lab4a/cone_locator",
-		shape=ellipse];
-	swerve_driver [
-		height=0.5,
-		label="/lab4a/swerve_driver",
-		shape=ellipse];
-	zed -> cone_thresholder [label="/camera/zed/rgb/image_rect_color"];
-	zed -> cone_locator [label="/camera/zed/rgb/camera_info"];
+	node [height=0.5, shape="ellipse"];
+
+	zed              [label="/camera/zed/zed_wrapper_node"];
+	cone_thresholder [label="/lab4/cone_thresholder"];
+	cone_locator     [label="/lab4/cone_locator"];
+	swerve_driver    [label="/lab4/swerve_driver"];
+
+	zed -> cone_thresholder          [label="/camera/zed/rgb/image_rect_color"];
+	zed -> cone_locator              [label="/camera/zed/rgb/camera_info"];
 	cone_thresholder -> cone_locator [label="/tokyo/cone_mask"];
-	cone_locator -> swerve_driver [label="/tokyo/cone"];
+	cone_locator -> swerve_driver    [label="/tokyo/cone"];
 }
