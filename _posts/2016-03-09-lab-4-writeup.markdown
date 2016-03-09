@@ -36,6 +36,8 @@ In this lab, the goal was to use the cameras on the racecar to navigate around a
 
 In
 
+**TODO**
+
 ## Computer vision
 
 The ZED camera publishes an `Image` topic with images from the front of the robot like this one:
@@ -130,7 +132,7 @@ $$
 Where $$w$$ is the position in world space, and $$p$$ is the position in image space. The constant $$k$$ encapsulates the rules for homogeneous transformations.
 
 
-TODO
+**TODO**
 
 We can find the depth with:
 
