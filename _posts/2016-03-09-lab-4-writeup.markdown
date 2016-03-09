@@ -22,7 +22,7 @@ In this lab, the goal was to use the cameras on the racecar to navigate around a
 
 ## Software architecture
 
-<!-- Insert node graph image here -->
+![ros node graph]({{ site.baseurl }}/assets/images/lab4/rosgraph.dot.svg)
 
 In 
 
