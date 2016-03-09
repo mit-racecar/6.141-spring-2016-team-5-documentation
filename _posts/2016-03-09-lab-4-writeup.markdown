@@ -11,19 +11,19 @@ In this lab, the goal was to use the cameras on the racecar to navigate around a
 ## Videos
 <!-- Sorted in reverse chronological order because it is more impressive that way. -->
 
-<div class="full-img" style="overflow: hidden">
-	<div style="margin-left:-0.4em;">
-		<div style="width: 33.33%; float: left; box-sizing: border-box; padding-left: 0.4em">
+<div class="full-img">
+	<div class="multicol-container">
+		<div class="multicol-col-3">
 			<!-- MIT 6.141 Team 5 Lab 4B  -->
 			<iframe width="315" height="560" src="https://www.youtube.com/embed/WK0avRR39mQ" frameborder="0" allowfullscreen></iframe>
 		</div>
 
-		<div style="width: 33.33%; float: left; box-sizing: border-box; padding-left: 0.4em">
+		<div class="multicol-col-3">
 			<!-- MIT 6.141 Team 5 Lab 4A With Pose  -->
 			<iframe width="315" height="560" src="https://www.youtube.com/embed/MSV4NGPCIm0" frameborder="0" allowfullscreen></iframe>
 		</div>
 
-		<div style="width: 33.33%; float: left; box-sizing: border-box; padding-left: 0.4em">
+		<div class="multicol-col-3">
 			<!-- MIT 6.141 Team 5 Lab 4A  -->
 			<iframe width="315" height="560" src="https://www.youtube.com/embed/OBo5qkxQ_W0" frameborder="0" allowfullscreen></iframe>
 		</div>
@@ -48,8 +48,21 @@ There are two different things that could be looked for when trying to locate th
 
 A video of a static cone was recorded, with the lighting conditions varying. This aimed to capture all the possible colors that the cone could appear as. As the cone did not move within the frame, it was possible to hand-draw a mask over a single frame, to label where the cone is. Samples can then be taken from all the pixels under the mask, for every frame, yielding a large dataset of shades of cone-orange.
 
-![animated gif of cone video]({{ site.baseurl }}/assets/images/lab4/shadow-video.gif)
-![monochrome mask of cone]({{ site.baseurl }}/assets/images/lab4/shadow-mask.png)
+<div class="full-img">
+	<div class="multicol-container">
+		<div class="multicol-col-2">
+			<img alt="animated gif of cone video"
+			     style="width: 100%"
+			     src="{{ site.baseurl }}/assets/images/lab4/shadow-video.gif" />
+		</div>
+
+		<div class="multicol-col-2">
+			<img alt="monochrome mask of cone"
+			     style="width: 100%"
+			     src="{{ site.baseurl }}/assets/images/lab4/shadow-mask.png" />
+		</div>
+	</div>
+</div>
 
 Using this data, there are a number of common options for building a classifier:
 
@@ -60,8 +73,23 @@ Using this data, there are a number of common options for building a classifier:
 
 A little more thought revealed a much simpler option - building a lookup table from color to orangeness. The following plots show the collected color data as voxels, where a voxel is filled if at least one of the samples of the cone falls inside it. Some thought must be put into choosing voxel sizes: too small, and the size of the lookup table might cause cache invalidation performance issues, and unless a very large amount of data is recorded, the tables will be sparse; too large, and the classifier will group non-orange colors with orange. We settled on a total of $$8^3$$ voxels.
 
-![plot of 6-bit voxels]({{ site.baseurl }}/assets/images/lab4/plot-6.png)
-![plot of 3-bit voxels]({{ site.baseurl }}/assets/images/lab4/plot-3.png)
+<div class="full-img">
+	<div class="multicol-container">
+		<div class="multicol-col-2">
+			<img alt="plot of 6-bit voxels"
+			     style="width: 100%"
+			     src="{{ site.baseurl }}/assets/images/lab4/plot-6.png" />
+		</div>
+
+		<div class="multicol-col-2">
+			<img alt="plot of 3-bit voxels"
+			     style="width: 100%"
+			     src="{{ site.baseurl }}/assets/images/lab4/plot-3.png" />
+		</div>
+	</div>
+</div>
+
+
 
 The output of the thresholder is the result of taking every pixel in the raw image, and looking up how many times that region of pixels occurred in the calibration sample. The result is returned as a grayscale image, with white representing the colors seen most in calibration, and black representing colors never seen in calibration.
 

@@ -16,3 +16,22 @@ li img {
 @import
 	"syntax"
 ;
+
+.multicol-container {
+	overflow: hidden;
+	margin-left: -0.4em;
+}
+
+.multicol-col-2 {
+	width: 50%;
+	float: left;
+	box-sizing: border-box;
+	padding-left: 0.4em;
+}
+
+.multicol-col-3 {
+	width: 33.33%;
+	float: left;
+	box-sizing: border-box;
+	padding-left: 0.4em;
+}
