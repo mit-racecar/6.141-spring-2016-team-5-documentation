@@ -131,10 +131,7 @@ $$
 
 Where $$w$$ is the position in world space, and $$p$$ is the position in image space. The constant $$k$$ encapsulates the rules for homogeneous transformations.
 
-
-**TODO**
-
-We can find the depth with:
+This can first be used to convert the pixel widths of the cone into a depth, using known information about the size of the cone, $$w_h = 0.17\mathrm{m}$$, $$w_w = 0.12\mathrm{m}$$. We start by considering two points in 3D which are the right distance apart, and finding where they project to:
 
 $$
 k_1\begin{bmatrix} p_w \\ p_h \\ 1 \end{bmatrix}
@@ -146,7 +143,18 @@ P
 \right)
 $$
 
-We find the 3D position by solving the following for $$w$$:
+For our $$P$$ matrix, it turns out that $$k_1 = k_2 = w_z$$, so this simplifies to:
+
+$$
+w_z\begin{bmatrix} p_w \\ p_h \\ 0 \end{bmatrix}
+=
+P
+\begin{bmatrix} w_w \\ w_h \\ 0 \\ 0 \end{bmatrix}
+$$
+
+Note that this equation is overconstrained - there are essentially two equations but only one unknown. We choose to pick the solution that predicts the nearer cone, which we'll call $$\hat{w}_z$$, since this deals better with cones partially occluded by the edge of the image.
+
+By combining the projection equation, which is underconstrained, with a constraint that $$w_z = \hat{w}_z$$, the 3D position $$w$$ can be found by solving a simple matrix equation:
 
 $$
 k\begin{bmatrix} p_x \\ p_y \\ 1 \\ 0\end{bmatrix} =
@@ -154,7 +162,7 @@ k\begin{bmatrix} p_x \\ p_y \\ 1 \\ 0\end{bmatrix} =
 P\\
 \hline
 \begin{matrix}
-0 & 0 & 1 & -\hat{w_z}
+0 & 0 & 1 & -\hat{w}_z
 \end{matrix}
 \end{bmatrix}
 \begin{bmatrix} w_x \\ w_y \\ w_z \\ 0\end{bmatrix}
