@@ -35,7 +35,7 @@
     $document.ready(function () {
 
         // Fit all videos for post content
-        // var $postContent = $(".post-content");
+        var $postContent = $(".post-content");
         // $postContent.fitVids();
 
         // Fit all videos everywhere
