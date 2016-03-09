@@ -59,7 +59,7 @@ The output of the thresholder is the result of taking every pixel in the raw ima
 
 ![located overlay image]({{ site.baseurl }}/assets/images/lab4/located-overlay.png)
 
-The `cone_locator` node reads the `cone_mask` topic published by the `cone_thresholder` node and finds the cone in the mask. It does this using scipy’s labeling feature. The `cone_mask` is first turned into a binary image by thresholding it at `127/255`. This throws away potentially useful information, but is a simplification which allows for using simple labeling. It then uses [`scipy.ndimage.measurements.label`](https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.ndimage.measurements.label.html) to find the unique connected blobs which are white in the binary image. These are the objects which are cone-colored, like the cone, other far away cones of other teams, and our shoes. It selects the largest cone by visual area and finds the bounding box of that. It publishes the location of the largest such blob to a `cone` topic of type `CameraObjectsStamped`.
+The `cone_locator` node reads the `cone_mask` topic published by the `cone_thresholder` node and finds the cone in the mask. It does this using scipy's labeling feature. The `cone_mask` is first turned into a binary image by thresholding it at `127/255`. This throws away potentially useful information, but is a simplification which allows for using simple labeling. It then uses [`scipy.ndimage.measurements.label`](https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.ndimage.measurements.label.html) to find the unique connected blobs which are white in the binary image. These are the objects which are cone-colored, like the cone, other far away cones of other teams, and our shoes. It selects the largest cone by visual area and finds the bounding box of that. It publishes the location of the largest such blob to a `cone` topic of type `CameraObjectsStamped`.
 
 The definition of the message types is as follows:
 
@@ -119,9 +119,9 @@ $$
 
 ## Control
 
-Two control schema were used over the course of the lab.  The first was image-based visual servoing.  Here, the results of the cone detector’s bounding box were directly fed as input to the controller.  This was applied to the first part of the lab with the objective of parking the racecar in front of the cone.  The bounding box was fed directly into a p-controller with a hard-coded setpoint for the bounding box location and size, resulting in the desired behavior.
+Two control schema were used over the course of the lab.  The first was image-based visual servoing.  Here, the results of the cone detector's bounding box were directly fed as input to the controller.  This was applied to the first part of the lab with the objective of parking the racecar in front of the cone.  The bounding box was fed directly into a p-controller with a hard-coded setpoint for the bounding box location and size, resulting in the desired behavior.
 
-The second was pose-based visual servoing.  Here, the cone detectors’ results were first fed into an intermediate pose estimation node before using the cone pose estimate as input to the p-controller.  This controller was applied to the second part of the lab with the objective of swerving the racecar around a line of cones in a serpentine.  This p-control was used while the cone was in sight of the camera, and the car followed a fixed-radius turn when the cone was not in sight.
+The second was pose-based visual servoing.  Here, the cone detectors' results were first fed into an intermediate pose estimation node before using the cone pose estimate as input to the p-controller.  This controller was applied to the second part of the lab with the objective of swerving the racecar around a line of cones in a serpentine.  This p-control was used while the cone was in sight of the camera, and the car followed a fixed-radius turn when the cone was not in sight.
 
 ## Conclusion
 
