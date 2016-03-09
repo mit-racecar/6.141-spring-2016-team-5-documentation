@@ -11,14 +11,24 @@ In this lab, the goal was to use the cameras on the racecar to navigate around a
 ## Videos
 <!-- Sorted in reverse chronological order because it is more impressive that way. -->
 
-<!-- MIT 6.141 Team 5 Lab 4B  -->
-<iframe width="420" height="315" src="https://www.youtube.com/embed/WK0avRR39mQ" frameborder="0" allowfullscreen></iframe>
+<div class="full-img" style="overflow: hidden">
+	<div style="margin-left:-0.4em;">
+		<div style="width: 33.33%; float: left; box-sizing: border-box; padding-left: 0.4em">
+			<!-- MIT 6.141 Team 5 Lab 4B  -->
+			<iframe width="315" height="560" src="https://www.youtube.com/embed/WK0avRR39mQ" frameborder="0" allowfullscreen></iframe>
+		</div>
 
-<!-- MIT 6.141 Team 5 Lab 4A With Pose  -->
-<iframe width="420" height="315" src="https://www.youtube.com/embed/MSV4NGPCIm0" frameborder="0" allowfullscreen></iframe> 
+		<div style="width: 33.33%; float: left; box-sizing: border-box; padding-left: 0.4em">
+			<!-- MIT 6.141 Team 5 Lab 4A With Pose  -->
+			<iframe width="315" height="560" src="https://www.youtube.com/embed/MSV4NGPCIm0" frameborder="0" allowfullscreen></iframe>
+		</div>
 
-<!-- MIT 6.141 Team 5 Lab 4A  -->
-<iframe width="420" height="315" src="https://www.youtube.com/embed/OBo5qkxQ_W0" frameborder="0" allowfullscreen></iframe>
+		<div style="width: 33.33%; float: left; box-sizing: border-box; padding-left: 0.4em">
+			<!-- MIT 6.141 Team 5 Lab 4A  -->
+			<iframe width="315" height="560" src="https://www.youtube.com/embed/OBo5qkxQ_W0" frameborder="0" allowfullscreen></iframe>
+		</div>
+	</div>
+</div>
 
 ## Software architecture
 
