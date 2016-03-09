@@ -73,7 +73,7 @@ Using this data, there are a number of common options for building a classifier:
 - find a small set of planar classifiers - a set of planes which contain the region of color-space holding orange colors. This generalizes the above two options
 - Attempt to use machine learning to come up with non-linear classifiers
 
-A little more thought revealed a much simpler option - building a lookup table from color to orangeness. The following plots show the collected color data as voxels, where a voxel is filled if at least one of the samples of the cone falls inside it. Some thought must be put into choosing voxel sizes: too small, and the size of the lookup table might cause cache invalidation performance issues, and unless a very large amount of data is recorded, the tables will be sparse; too large, and the classifier will group non-orange colors with orange. We settled on a total of $$8^3$$ voxels.
+A little more thought revealed a much simpler option - building a lookup table from color to orangeness. The following plots show the collected color data as voxels, where a voxel is filled if at least one of the samples of the cone falls inside it.
 
 <div class="full-img">
 	<div class="multicol-container">
@@ -91,7 +91,7 @@ A little more thought revealed a much simpler option - building a lookup table f
 	</div>
 </div>
 
-
+Some thought must be put into choosing voxel sizes: too small, and the size of the lookup table might cause cache invalidation performance issues, and unless a very large amount of data is recorded, the tables will be sparse; too large, and the classifier will group non-orange colors with orange. We settled on a total of $$8^3$$ voxels.
 
 The output of the thresholder is the result of taking every pixel in the raw image, and looking up how many times that region of pixels occurred in the calibration sample. The result is returned as a grayscale image, with white representing the colors seen most in calibration, and black representing colors never seen in calibration.
 
