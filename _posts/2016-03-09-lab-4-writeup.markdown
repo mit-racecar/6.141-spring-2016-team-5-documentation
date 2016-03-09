@@ -6,9 +6,6 @@ categories: writeups
 
 In this lab, the goal was to use the cameras on the racecar to navigate around a bright orange cone. This entailed writing computer vision code to identify the cone, and a controller to weave around the cones smoothly
 
-<!--more-->
-
-## Videos
 <!-- Sorted in reverse chronological order because it is more impressive that way. -->
 
 <div class="full-img">
@@ -30,11 +27,13 @@ In this lab, the goal was to use the cameras on the racecar to navigate around a
 	</div>
 </div>
 
+<!--more-->
+
 ## Software architecture
 
 ![ros node graph]({{ site.baseurl }}/assets/images/lab4/rosgraph.dot.svg)
 
-In 
+In
 
 ## Computer vision
 
@@ -116,7 +115,7 @@ CameraObject:
 The behaviour of a camera can be described with a rectangular projection matrix. This transforms [homogeneous coordinates](https://en.wikipedia.org/wiki/Homogeneous_coordinates) from the world space to the image plane. ROS sends this information by default alongside any image messages - the topic `/camera_info`, of type `CameraInfo`. The property of interest is `CameraInfo.P`. Interpreted as a 3 &times; 4 matrix, this satisfies the equation below
 
 $$
-k\begin{bmatrix} p_x \\ p_y \\ 1 \end{bmatrix} = 
+k\begin{bmatrix} p_x \\ p_y \\ 1 \end{bmatrix} =
 \underbrace{
   \begin{bmatrix}
   f_x & 0 & c_x & T_x \\
@@ -135,11 +134,11 @@ TODO
 We can find the depth with:
 
 $$
-k_1\begin{bmatrix} p_w \\ p_h \\ 1 \end{bmatrix} 
-- k_2\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} = 
+k_1\begin{bmatrix} p_w \\ p_h \\ 1 \end{bmatrix}
+- k_2\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} =
 P
 \left(
-\begin{bmatrix} w_w \\ w_h \\ w_z \\ 1 \end{bmatrix} - 
+\begin{bmatrix} w_w \\ w_h \\ w_z \\ 1 \end{bmatrix} -
 \begin{bmatrix} 0 \\ 0 \\ w_z \\ 1 \end{bmatrix}
 \right)
 $$
