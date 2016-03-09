@@ -160,6 +160,10 @@ P\\
 \begin{bmatrix} w_x \\ w_y \\ w_z \\ 0\end{bmatrix}
 $$
 
+## Mitigating Input Image Latency
+
+**TODO (Winter)** 
+
 ## Control
 
 Two control schema were used over the course of the lab.  The first was image-based visual servoing.  Here, the results of the cone detector's bounding box were directly fed as input to the controller.  This was applied to the first part of the lab with the objective of parking the racecar in front of the cone.  The bounding box was fed directly into a p-controller with a hard-coded setpoint for the bounding box location and size, resulting in the desired behavior.
@@ -167,6 +171,8 @@ Two control schema were used over the course of the lab.  The first was image-ba
 The second was pose-based visual servoing.  Here, the cone detectors' results were first fed into an intermediate pose estimation node before using the cone pose estimate as input to the p-controller.  This controller was applied to the second part of the lab with the objective of swerving the racecar around a line of cones in a serpentine.  This p-control was used while the cone was in sight of the camera, and the car followed a fixed-radius turn when the cone was not in sight.
 
 ## Conclusion
+
+**TODO**
 
 
 ### Open source contributions
