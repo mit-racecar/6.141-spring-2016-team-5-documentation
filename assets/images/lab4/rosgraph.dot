@@ -1,20 +1,20 @@
 # http://www.graphviz.org/content/cluster
 
-digraph G {
+digraph {
+    subgraph {
+        style=filled;
+        color=lightgrey;
+        label = "Image Processing Software";
 
-	subgraph cluster_0 {
-		style=filled;
-		color=lightgrey;
-		node [style=filled,color=white];
-		zed              [label="/camera/zed/zed_wrapper_node"];
-	    cone_thresholder [label="/lab4/cone_thresholder"];
-	    cone_locator     [label="/lab4/cone_locator"];
-	    swerve_driver    [label="/lab4/swerve_driver"];
+        node [style=filled,color=white];
+        zed              [label="/camera/zed/zed_wrapper_node"];
+        cone_thresholder [label="/lab4/cone_thresholder"];
+        cone_locator     [label="/lab4/cone_locator"];
+        swerve_driver    [label="/lab4/swerve_driver"];
 
-	    zed -> cone_thresholder          [label="/camera/zed/rgb/image_rect_color"];
-	    zed -> cone_locator              [label="/camera/zed/rgb/camera_info"];
-	    cone_thresholder -> cone_locator [label="/tokyo/cone_mask"];
-	    cone_locator -> swerve_driver    [label="/tokyo/cone"];
-		  label = "Image Processing Software";
-	}
+        zed -> cone_thresholder          [label="/camera/zed/rgb/image_rect_color"];
+        zed -> cone_locator              [label="/camera/zed/rgb/camera_info"];
+        cone_thresholder -> cone_locator [label="/tokyo/cone_mask"];
+        cone_locator -> swerve_driver    [label="/tokyo/cone"];
+    }
 }
