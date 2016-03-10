@@ -1,0 +1,36 @@
+# http://www.graphviz.org/content/cluster
+
+digraph G {
+
+	subgraph cluster_0 {
+		style=filled;
+		color=lightgrey;
+		node [style=filled,color=white];
+		zed              [label="/camera/zed/zed_wrapper_node"];
+	    cone_thresholder [label="/lab4/cone_thresholder"];
+	    cone_locator     [label="/lab4/cone_locator"];
+	    swerve_driver    [label="/lab4/swerve_driver"];
+
+	    zed -> cone_thresholder          [label="/camera/zed/rgb/image_rect_color"];
+	    zed -> cone_locator              [label="/camera/zed/rgb/camera_info"];
+	    cone_thresholder -> cone_locator [label="/tokyo/cone_mask"];
+	    cone_locator -> swerve_driver    [label="/tokyo/cone"];
+		label = "Image Processing";
+	}
+
+	subgraph cluster_1 {
+		node [style=filled];
+		lag_debug        [label="/lab4/debug_cone_thresholder_lag"]
+        ros_out          [label="ros_out"]
+
+
+        cone_thresholder -> lag_debug [label="/lab4/cone_thresholder/debug/packet_entered_node"];
+	    cone_locator -> lag_debug     [label="/lab4/cone_locator/debug/packet_entered_node"];
+        lag_debug -> ros_out          [label="/lab4a/cone_thresholder/debug/processing_lag"];
+		style=filled;
+		color=lightblue;
+		label = "Propagation Delay Analyzer";
+	}
+
+
+}
