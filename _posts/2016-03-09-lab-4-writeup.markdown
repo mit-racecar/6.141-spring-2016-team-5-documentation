@@ -30,6 +30,8 @@ In this lab, the goal was to use the cameras on the racecar to navigate around a
 
 <!--more-->
 
+<!-- toc -->
+
 ## Software Architecture
 
 <object type="image/svg+xml" data="{{ site.baseurl }}/assets/images/lab4/rosgraph.dot.svg"></object>

@@ -5,6 +5,7 @@ meta_description: "MIT 6.141 Team 5 Project Blog"
 markdown: kramdown
 kramdown:
   input: GFM
+  toc_levels: "2,3"
 
 highlighter: rouge
 logo: false
