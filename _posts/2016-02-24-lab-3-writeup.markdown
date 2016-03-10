@@ -14,8 +14,14 @@ In this week's lab, the goal was to create a rudimentary pipeline for following 
 
 ![our node graph]({{ site.baseurl }}/assets/images/lab3-rosgraph.dot.svg)
 
-## Estimation
+## Table of Contents
+{:.no_toc}
 
+* This list element is automatically replaced with the TOC
+{:toc}
+
+
+## Estimation
 
 ![rviz results from simulated laser scan]({{ site.baseurl }}/assets/images/lab3-point-clouds.png)
 

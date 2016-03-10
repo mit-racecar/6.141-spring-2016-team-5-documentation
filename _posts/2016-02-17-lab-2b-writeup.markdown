@@ -10,6 +10,12 @@ Lab 2B was focused on setting up the team's tools and environment in order to ef
 
 <!--more-->
 
+## Table of Contents
+{:.no_toc}
+
+* This list element is automatically replaced with the TOC
+{:toc}
+
 ## Module 1
 
 Module 1 tasks set up our development environment.  The hosts file on the VM was updated to enable proper connection to the robot through the access point.  In terms of code sharing, MIT's github enterprise allows more freedom of use than public github for the purposes of this project.  Most group members set up SSH keys for authentication as well, to avoid the clumsiness of using tokens to authenticate.
