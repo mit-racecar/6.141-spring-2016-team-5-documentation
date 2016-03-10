@@ -102,5 +102,11 @@
             }
         });
 
+        $(window).on('load', function() {
+            $("object[type='image/svg+xml'][data*='.dot.svg']").each(function() {
+                var $svg = $(this.contentDocument);
+                $svg.find('title').remove();
+            });
+        });
     };
 })(jQuery, 'smartresize');
