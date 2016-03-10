@@ -30,7 +30,7 @@ In this lab, the goal was to use the cameras on the racecar to navigate around a
 
 <!--more-->
 
-## Software architecture
+## Software Architecture
 
 ![ros node graph]({{ site.baseurl }}/assets/images/lab4/rosgraph.dot.svg)
 
@@ -38,7 +38,7 @@ In
 
 **TODO**
 
-## Computer vision
+## Computer Vision
 
 The ZED camera publishes an `Image` topic with images from the front of the robot like this one:
 
@@ -95,7 +95,7 @@ Some thought must be put into choosing voxel sizes: too small, and the size of t
 
 The output of the thresholder is the result of taking every pixel in the raw image, and looking up how many times that region of pixels occurred in the calibration sample. The result is returned as a grayscale image, with white representing the colors seen most in calibration, and black representing colors never seen in calibration.
 
-### Blob detection
+### Blob Detection
 
 ![located overlay image]({{ site.baseurl }}/assets/images/lab4/located-overlay.png)
 
@@ -113,7 +113,7 @@ CameraObject:
 - geometry_msgs/Vector3 size
 ```
 
-### Extracting spatial information
+### Extracting Spatial Information
 
 The behaviour of a camera can be described with a rectangular projection matrix. This transforms [homogeneous coordinates](https://en.wikipedia.org/wiki/Homogeneous_coordinates) from the world space to the image plane. ROS sends this information by default alongside any image messages - the topic `/camera_info`, of type `CameraInfo`. The property of interest is `CameraInfo.P`. Interpreted as a 3 &times; 4 matrix, this satisfies the equation below
 
@@ -168,7 +168,7 @@ P\\
 \begin{bmatrix} w_x \\ w_y \\ w_z \\ 0\end{bmatrix}
 $$
 
-## Mitigating Input Image Latency
+### Mitigating Input Image Latency
 
 During the implementation of our team's computer vision algorithms, we noticed that our robot had a significant perception delay. For the 1st implementation of our vision code, our robot could see and track the cone, but would would take up to half a second to adjust to changes in position of the cone. To debug this perception latency issue, we wrote a node (shown below) that measured the message propagation delay between a set of 2 nodes in our control algorithm.
 
@@ -191,7 +191,7 @@ The second was pose-based visual servoing.  Here, the cone detectors' results we
 **TODO**
 
 
-### Open source contributions
+### Open Source Contributions
 * ![](https://github-shields.com/github/ros-visualization/rqt_common_plugins/pull/355
 .svg) - Condense layout of RQT node window
 * ![](https://github-shields.com/github/ros-perception/vision_opencv/pull/112.svg) - Fix a remote code execution vulnerability in `cv_bridge`

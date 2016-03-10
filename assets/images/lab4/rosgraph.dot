@@ -1,19 +1,20 @@
-digraph lab4 {
-	graph [
-		compound=True,
-		rank=same,
-		rankdir=LR,
-		ranksep=0.2
-	];
-	node [height=0.5, shape="ellipse"];
+# http://www.graphviz.org/content/cluster
 
-	zed              [label="/camera/zed/zed_wrapper_node"];
-	cone_thresholder [label="/lab4/cone_thresholder"];
-	cone_locator     [label="/lab4/cone_locator"];
-	swerve_driver    [label="/lab4/swerve_driver"];
+digraph G {
 
-	zed -> cone_thresholder          [label="/camera/zed/rgb/image_rect_color"];
-	zed -> cone_locator              [label="/camera/zed/rgb/camera_info"];
-	cone_thresholder -> cone_locator [label="/tokyo/cone_mask"];
-	cone_locator -> swerve_driver    [label="/tokyo/cone"];
+	subgraph cluster_0 {
+		style=filled;
+		color=lightgrey;
+		node [style=filled,color=white];
+		zed              [label="/camera/zed/zed_wrapper_node"];
+	    cone_thresholder [label="/lab4/cone_thresholder"];
+	    cone_locator     [label="/lab4/cone_locator"];
+	    swerve_driver    [label="/lab4/swerve_driver"];
+
+	    zed -> cone_thresholder          [label="/camera/zed/rgb/image_rect_color"];
+	    zed -> cone_locator              [label="/camera/zed/rgb/camera_info"];
+	    cone_thresholder -> cone_locator [label="/tokyo/cone_mask"];
+	    cone_locator -> swerve_driver    [label="/tokyo/cone"];
+		  label = "Image Processing Software";
+	}
 }
