@@ -167,7 +167,7 @@ P\\
 0 & 0 & 1 & -\hat{w}_z
 \end{matrix}
 \end{bmatrix}
-\begin{bmatrix} w_x \\ w_y \\ w_z \\ 0\end{bmatrix}
+\begin{bmatrix} w_x \\ w_y \\ w_z \\ 1\end{bmatrix}
 $$
 
 ### Mitigating Input Image Latency
