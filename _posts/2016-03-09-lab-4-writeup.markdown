@@ -170,7 +170,15 @@ $$
 
 ## Mitigating Input Image Latency
 
-**TODO (Winter)** 
+During the implementation of our team's computer vision algorithms, we noticed that our robot had a significant perception delay. For the 1st implementation of our vision code, our robot could see and track the cone, but would would take up to half a second to adjust to changes in position of the cone. To debug this perception latency issue, we wrote a node (shown below) that measured the message propagation delay between a set of 2 nodes in our control algorithm.
+
+![ros delay node graph]({{ site.baseurl }}/assets/images/lab4/roslag.svg)
+
+To achieve this, our C++ latency measuring node listens in on `packet_entered_node` and `packet_left_node` Header messages that every node in our system emits directly after serializing an input packet or broadcasting an output message (respectively). The header messages for `packet_entered_node`, `packet_left_node`, and the output packet of the node are carbon copy clones of the header message included in the input to our processing node. This allows us to debug latency issues throughout our entire node tree.
+
+By feeding the `packet_entered_node` and `packet_left_node` Headers to our node latency calculator, our latency calculator node outputs  `propagation_delay` and `upstream_delay` statistics in `String` form on a unique, human-readable topic. For the example graph above, `propagation_delay` is the delay in ms between a packet entering `/lab4/cone_thresholder` and entering `/lab4/cone_locator`, `upstream_delay` is the age in ms of the packet that has entered `/lab4/cone_thresholder`, and the output topic is `/lab4a/cone_thresholder/debug/processing_lag`, .
+
+Using this new node type, we were able to diagnose our issues with input latency by connecting this node to multiple configurations of upstream and downstream nodes. Is it turns out, `/lab4/cone_thresholder` and `/lab4/cone_locator` each take about 45ms to process image data. However, `/camera/zed/zed_wrapper_node` outputs images that are 300ms old! Therefore, our perception delays seemed to come from the Zed camera and not our image processing code. Using this information we were able to reduce our input delay to an acceptable level by reducing the output resolution of the Zed camera.
 
 ## Control
 
