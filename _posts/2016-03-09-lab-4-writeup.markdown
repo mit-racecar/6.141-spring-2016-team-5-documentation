@@ -40,17 +40,14 @@ In this lab, the goal was to use the cameras on the racecar to navigate around a
 
 <object type="image/svg+xml" data="{{ site.baseurl }}/assets/images/lab4/rosgraph.dot.svg"></object>
 
-In
 
-**TODO**
-
-## Computer Vision
+### Computer Vision
 
 The ZED camera publishes an `Image` topic with images from the front of the robot like this one:
 
 ![zed color image]({{ site.baseurl }}/assets/images/lab4/zed-color.png)
 
-### Thresholding
+#### Thresholding
 
 There are two different things that could be looked for when trying to locate the cone in this image - shape, and color. Our implementation chose to discard shape, and classify cones exclusively by color. In order to do this, the color of the cone must be measured.
 
@@ -101,7 +98,7 @@ Some thought must be put into choosing voxel sizes: too small, and the size of t
 
 The output of the thresholder is the result of taking every pixel in the raw image, and looking up how many times that region of pixels occurred in the calibration sample. The result is returned as a grayscale image, with white representing the colors seen most in calibration, and black representing colors never seen in calibration.
 
-### Blob Detection
+#### Blob Detection
 
 ![located overlay image]({{ site.baseurl }}/assets/images/lab4/located-overlay.png)
 
@@ -119,7 +116,7 @@ CameraObject:
 - geometry_msgs/Vector3 size
 ```
 
-### Extracting Spatial Information
+#### Extracting Spatial Information
 
 The behaviour of a camera can be described with a rectangular projection matrix. This transforms [homogeneous coordinates](https://en.wikipedia.org/wiki/Homogeneous_coordinates) from the world space to the image plane. ROS sends this information by default alongside any image messages - the topic `/camera_info`, of type `CameraInfo`. The property of interest is `CameraInfo.P`. Interpreted as a 3 &times; 4 matrix, this satisfies the equation below
 
@@ -174,7 +171,7 @@ P\\
 \begin{bmatrix} w_x \\ w_y \\ w_z \\ 1\end{bmatrix}
 $$
 
-### Mitigating Input Image Latency
+#### Mitigating Input Image Latency
 
 During the implementation of our team's computer vision algorithms, we noticed that our robot had a significant perception delay. For the 1st implementation of our vision code, our robot could see and track the cone, but would would take up to half a second to adjust to changes in position of the cone. To debug this perception latency issue, we wrote a node (shown below) that measured the message propagation delay between a set of 2 nodes in our control algorithm.
 
@@ -186,20 +183,14 @@ By feeding the `packet_entered_node` and `packet_left_node` Headers to our node 
 
 Using this new node type, we were able to diagnose our issues with input latency by connecting this node to multiple configurations of upstream and downstream nodes. Is it turns out, `/lab4/cone_thresholder` and `/lab4/cone_locator` each take about 45ms to process image data. However, `/camera/zed/zed_wrapper_node` outputs images that are 300ms old! Therefore, our perception delays seemed to come from the Zed camera and not our image processing code. Using this information we were able to reduce our input delay to an acceptable level by reducing the output resolution of the Zed camera.
 
-## Control
+### Control
 
 Two control schema were used over the course of the lab.  The first was image-based visual servoing.  Here, the results of the cone detector's bounding box were directly fed as input to the controller.  This was applied to the first part of the lab with the objective of parking the racecar in front of the cone.  The bounding box was fed directly into a p-controller with a hard-coded setpoint for the bounding box location and size, resulting in the desired behavior.
 
 The second was pose-based visual servoing.  Here, the cone detectors' results were first fed into an intermediate pose estimation node before using the cone pose estimate as input to the p-controller.  This controller was applied to the second part of the lab with the objective of swerving the racecar around a line of cones in a serpentine.  This p-control was used while the cone was in sight of the camera, and the car followed a fixed-radius turn when the cone was not in sight.
 
-## Conclusions
 
-### Results
-
-**TODO**
-
-
-### Open Source Contributions
+## Open Source Contributions
 * ![](https://github-shields.com/github/ros-visualization/rqt_common_plugins/pull/355
 .svg) - Condense layout of RQT node window
 * ![](https://github-shields.com/github/ros-perception/vision_opencv/pull/112.svg) - Fix a remote code execution vulnerability in `cv_bridge`
