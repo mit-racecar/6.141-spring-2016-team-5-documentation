@@ -5,3 +5,5 @@ categories: slides
 ---
 
 <iframe src="https://docs.google.com/presentation/d/1XHG0e0SMnvZHWL35wB0ebjpf-7GNpNpY7OfzQ7E2a1w/embed?start=false&loop=false&delayms=60000" width="960" height="569" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+The PDF of the slides can be found <a href="https://docs.google.com/presentation/d/1XHG0e0SMnvZHWL35wB0ebjpf-7GNpNpY7OfzQ7E2a1w/export/pdf?id=1XHG0e0SMnvZHWL35wB0ebjpf-7GNpNpY7OfzQ7E2a1w">[here].</a>
