@@ -1,0 +1,9 @@
+---
+layout:     post
+title:      "Lab 5 Slides"
+categories: slides
+---
+
+<iframe src="https://docs.google.com/presentation/d/1oUizpZ2cm8Y98WMdyFWWm5XUODekUdDU2C1XuTtKAA0/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+The PDF of the slides can be found <a href="https://docs.google.com/presentation/d/1oUizpZ2cm8Y98WMdyFWWm5XUODekUdDU2C1XuTtKAA0/export/pdf?id=1oUizpZ2cm8Y98WMdyFWWm5XUODekUdDU2C1XuTtKAA0&pageid=p">[here].</a>
