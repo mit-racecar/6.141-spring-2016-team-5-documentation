@@ -42,8 +42,7 @@ Where $$\phi$$ is the steering angle. These values can be propagated through the
 
 Once we have the velocities and their covariances, we are able to take samples from a multivariate normal distribution:
 
-$$
-\begin{bmatrix} V_x \\ \Omega_z \end{bmatrix} \sim \mathcal{N}\left(
+$$\begin{bmatrix} V_x \\ \Omega_z \end{bmatrix} \sim \mathcal{N}\left(
   \begin{bmatrix} \bar{v}_x \\ \bar{\omega}_x \end{bmatrix},
   \begin{bmatrix} \sigma_v^2 & \sigma_(v\omega)\\ \sigma_(v\omega) & \sigma_\omega^2 \end{bmatrix}
 \right)
@@ -52,8 +51,7 @@ $$
 
 We sample our velocities from this distribution, then use an approach considering the angle half-way through the motion in order to integrate these velocities into poses:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \Delta\theta &= \omega_z \Delta t \\
 \Delta s     &= v_x \Delta t \\
 x_{t}        &= x_{t'} + \Delta s \cos{\left(\theta_{t'} + \frac{1}{2}\Delta\theta)} \\
