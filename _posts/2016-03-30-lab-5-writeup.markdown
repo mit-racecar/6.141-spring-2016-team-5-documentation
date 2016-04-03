@@ -7,8 +7,10 @@ categories: writeups
 There were three primary goals for this lab. These were:
 
 - Mapping: Collect `Odometry`, `LaserScan`, and `Transform` data with the racecar, in order to create a map on the VM. Do this using existing tools within the ros infrastructure
-- Localization: Using the pre-recorded map information, create a particle filter to find the pose of the racecar using realtime `Odometry` and `LaserScan` data. 
+- Localization: Using the pre-recorded map information, create a particle filter to find the pose of the racecar using realtime `Odometry` and `LaserScan` data.
 - Control: Given a preset path, design a controller which causes the robot to follow the path.
+
+<!--more-->
 
 ## Mapping
 
@@ -125,7 +127,7 @@ We settled on the last option, which results in C code like:
 ```C
 void calc_line(int8_t* map, size_t xlen, size_t ylen, size_t sx, size_t sy, size_t *tx, size_t *ty) { ... }
 ```
-And the somewhat messy python wrapper to call this function from python: 
+And the somewhat messy python wrapper to call this function from python:
 
 ```python
 from ctypes import *
@@ -175,5 +177,3 @@ The results of the above optimizations are summarized below
   * https://github.mit.edu/racecar/vesc/pull/3
   * https://github.mit.edu/racecar/racecar/pull/15
   * https://github.mit.edu/racecar/racecar_simulator/pull/6
-
-
