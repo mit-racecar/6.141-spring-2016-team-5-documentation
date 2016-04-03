@@ -36,7 +36,7 @@ The vesc nodes publish an `Odometry` message on `vesc/odom` containing the insta
 
 It should also publish the covariance matrix of these velocities, but it [does not](https://github.mit.edu/racecar/vesc/blob/d7358d9b1b2d2227c0301a55edf407ed81627ef5/vesc_ackermann/src/vesc_to_odom.cpp#L114). We therefore make some assumptions to calculate this ourselves. We assumed:
 
-$$\sigma_v = 0.1 \mathrm{ms^-1}, \quad \sigma_\phi = 10°$$
+$$\sigma_v = 0.1 \mathrm{ms^{-1}}, \quad \sigma_\phi = 10°$$
 
 Where $$\phi$$ is the steering angle. These values can be propagated through the equations of dynamics to produce covariance estimates for $$\omega$$, the results for which can be seen in [this pull request](https://github.mit.edu/racecar/vesc/pull/4).
 
@@ -45,7 +45,7 @@ Once we have the velocities and their covariances, we are able to take samples f
 $$
 \begin{bmatrix} V_x \\ \Omega_z \end{bmatrix} \sim \mathcal{N}\left(
   \begin{bmatrix} \bar{v}_x \\ \bar{\omega}_x \end{bmatrix},
-  \begin{bmatrix} \sigma_v^2 & \sigma_(v\omega)\\ \sigma_(v\omega) & \sigma_\omega^2 \end{bmatrix}
+  \begin{bmatrix} \sigma_v^2 & \sigma_{v\omega}\\ \sigma_{v\omega} & \sigma_\omega^2 \end{bmatrix}
 \right)
 $$
 
