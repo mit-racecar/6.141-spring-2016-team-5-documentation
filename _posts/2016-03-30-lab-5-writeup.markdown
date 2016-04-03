@@ -2,6 +2,7 @@
 layout:     post
 title:      "Lab 5 Writeup"
 categories: writeups
+cover:      /assets/images/lab5/mapping_rle.png
 ---
 
 There were three primary goals for this lab. These were:
@@ -10,7 +11,33 @@ There were three primary goals for this lab. These were:
 - Localization: Using the pre-recorded map information, create a particle filter to find the pose of the racecar using realtime `Odometry` and `LaserScan` data.
 - Control: Given a preset path, design a controller which causes the robot to follow the path.
 
+<div class="full-img">
+	<div class="multicol-container">
+    <!-- Particle filter -->
+    <div class="multicol-col-2">
+      <img alt="Image of the particle filter at work."
+      style="width: 100%"
+           src="{{ site.baseurl }}/assets/images/lab5/particle_filter.png" />
+       <img alt="Image of the particle filter at work."
+       style="width: 100%"
+           src="{{ site.baseurl }}/assets/images/lab5/mapping_rle.png" />
+    </div>
+    <!-- Path Follower  -->
+    <div class="multicol-col-2">
+      <img alt="Moving Gif of the path follower software in simulation."
+      style="width: 100%"
+           src="{{ site.baseurl }}/assets/images/lab5/gazebo_sim_path_follow.gif" />
+    </div>
+	</div>
+</div>
+
 <!--more-->
+
+## Table of Contents
+{:.no_toc}
+
+* This list element is automatically replaced with the TOC
+{:toc}
 
 ## Mapping
 
