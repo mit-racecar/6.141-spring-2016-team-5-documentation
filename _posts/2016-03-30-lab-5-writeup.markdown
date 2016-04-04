@@ -97,12 +97,42 @@ Instead of using $$\Delta t = t - t'$$, we estimate it as the mean change in tim
 
 To implement sensor update, since we were initially not using the map packages in AMCL we must implement raytracing to find the expected range of a sensor reading. To do so, we began with Bresenham’s line algorithm. Given two grid points, the line algorithm returns most of the grid cells that the line connecting the two grid points’ centers passes through. However, since it does not return all of the points, a modified version was used.
 
-In order to return the weights associated with each particle, TODO
+<!-- In order to return the weights associated with each particle, TODO -->
 
 
 ## Control
 
-TODO
+### Robust Path Following Using P-control
+
+
+<!-- Path Follower  -->
+<div class="multicol-col-2">
+  <img alt="Moving Gif of the path follower software in simulation."
+  style="width: 90%"
+       src="{{ site.baseurl }}/assets/images/lab5/gazebo_sim_path_follow.gif" />
+</div>
+
+
+Following the specifications for `Lab 5B`, we implemented a proportional controller that follows a path of waypoints based on localization information available to the robot. This controller is passed a message of type `nav_msgs/Path` containing a set of global waypoints for the robot to traverse in order. However, since we expect that our higher level path-planning navigation system will take some time to run, we designed our path follower node to seamlessly deal with path messages that arrive sporadically or delayed. To the left, you can see a GIF of this path-following node in action using odometry information from Gazebo internals.
+
+To accomplish this, our path follower node maintains an internal state consisting of `current_path` and `next_waypoint_index`. Using these two internal state variables, the path follower node can determine when a received path message is new and also which waypoint the robot should proceed to first along the waypoint path.
+
+This last part is especially important if the robot is traveling at speed when a new path arrives at the path follower node. Under this condition, the robot is very likely to receive a path where the first waypoint is already behind the robot and should therefore be ignored.
+
+
+### Testing Path Following Using Gazebo
+
+<!-- Insert gif of derpy odom -->
+<div class="multicol-col-2">
+  <img alt="Moving Gif of the path follower software in simulation."
+  style="width: 90%"
+       src="{{ site.baseurl }}/assets/images/lab5/gazebo_odom.gif" />
+</div>
+
+To test our path planner, we wanted to be able to run our path planning software in the Gazebo simulation environment. However, since the stock `racecar_simulator` code does not support odometry output for the robot, we tried pulling in patch `a05d4c8` from upstream. However, this odometry patch was a breaking change caused by overconstraints caused by the addition to a `libgazebo_ros_planar_move` motion controller to the existing `Ackermann` based control system. This control contention caused some pretty hilarious consequences (see the GIF on the left, taking careful note of the position of the car's font wheels).
+
+To fix this problem, we reverted the upstream commit `a05d4c8` and created an odometry node that takes in information from Gazebo internals and outputs odometry information on topic `/odom` (see figure below). Using this new node, odometry now functions as expected in Gazebo, allowing us to create a path follower that allows the robot to traverse the entire tunnel system in simulation.
+
 
 ---
 
