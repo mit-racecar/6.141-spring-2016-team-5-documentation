@@ -136,6 +136,8 @@ To test our path planner, we wanted to be able to run our path planning software
 To fix this problem, we reverted the upstream commit `a05d4c8` and created an odometry node that takes in information from Gazebo internals and outputs odometry information on topic `/odom` (see figure below). Using this new node, odometry now functions as expected in Gazebo, allowing us to create a path follower that allows the robot to traverse the entire tunnel system in simulation.
 
 
+<!-- TODO Add block diagram of the nodes -->
+
 ---
 
 ## Writing performant code in python
@@ -234,5 +236,11 @@ The results of the above optimizations are summarized below
   * ros/ros_comm#783
 * Fixes to the RSS2016 codebase
   * https://github.mit.edu/racecar/vesc/pull/3
-  * https://github.mit.edu/racecar/racecar/pull/15
   * https://github.mit.edu/racecar/racecar_simulator/pull/6
+  * https://github.mit.edu/racecar/racecar_simulator/pull/7
+  * https://github.mit.edu/racecar/racecar_simulator/pull/9
+  * https://github.mit.edu/racecar/racecar_simulator/pull/10
+  * https://github.mit.edu/racecar/racecar_simulator/pull/11
+  * https://github.mit.edu/racecar/racecar_simulator/pull/13
+  * https://github.mit.edu/racecar/racecar_simulator/pull/14
+  * https://github.mit.edu/racecar/racecar/pull/15
