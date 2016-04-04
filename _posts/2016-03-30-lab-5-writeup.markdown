@@ -66,9 +66,11 @@ Instead of using $$\Delta t = t - t'$$, we estimate it as the mean change in tim
 
 ### Sensor weighting
 
-To implement sensor update, since we were initially not using the map packages in AMCL we must implement raytracing to find the expected range of a sensor reading. To do so, we began with Bresenham’s line algorithm. Given two grid points, the line algorithm returns most of the grid cells that the line connecting the two grid points’ centers passes through. However, since it does not return all of the points, a modified version was used.
+To implement sensor update, since we were initially not using the map packages in AMCL we must implement raytracing to find the expected range of a sensor reading. To do so, we began with Bresenham's line algorithm. Given two grid points, the line algorithm returns most of the grid cells that the line connecting the two grid points' centers passes through. However, since it does not return all of the points, a modified version was used.
 
-In order to return the weights associated with each particle, TODO
+In order to return the weights associated with each particle, we approximated the probability densities of the error with a Gaussian with mean 0. A standard deviation was picked that offered reasonable output probabilities.
+
+Once we discovered that using Python code would be far too slow, the raytracing implementation was redone in C and modeled after the AMCL packages. As discussed below, we performed the raytracing component of the sensor update in C and used its output with the ctypes library.
 
 
 ## Control
