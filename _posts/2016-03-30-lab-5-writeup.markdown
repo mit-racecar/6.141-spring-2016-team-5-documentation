@@ -2,13 +2,42 @@
 layout:     post
 title:      "Lab 5 Writeup"
 categories: writeups
+cover:      /assets/images/lab5/mapping_rle.png
 ---
 
 There were three primary goals for this lab. These were:
 
 - Mapping: Collect `Odometry`, `LaserScan`, and `Transform` data with the racecar, in order to create a map on the VM. Do this using existing tools within the ros infrastructure
-- Localization: Using the pre-recorded map information, create a particle filter to find the pose of the racecar using realtime `Odometry` and `LaserScan` data. 
+- Localization: Using the pre-recorded map information, create a particle filter to find the pose of the racecar using realtime `Odometry` and `LaserScan` data.
 - Control: Given a preset path, design a controller which causes the robot to follow the path.
+
+<div class="full-img">
+	<div class="multicol-container">
+    <!-- Particle filter -->
+    <div class="multicol-col-2">
+      <img alt="Image of the particle filter at work."
+      style="width: 100%"
+           src="{{ site.baseurl }}/assets/images/lab5/particle_filter.png" />
+       <img alt="Image of the particle filter at work."
+       style="width: 100%"
+           src="{{ site.baseurl }}/assets/images/lab5/mapping_rle.png" />
+    </div>
+    <!-- Path Follower  -->
+    <div class="multicol-col-2">
+      <img alt="Moving Gif of the path follower software in simulation."
+      style="width: 100%"
+           src="{{ site.baseurl }}/assets/images/lab5/gazebo_sim_path_follow.gif" />
+    </div>
+	</div>
+</div>
+
+<!--more-->
+
+## Table of Contents
+{:.no_toc}
+
+* This list element is automatically replaced with the TOC
+{:toc}
 
 ## Mapping
 
@@ -75,7 +104,37 @@ Once we discovered that using Python code would be far too slow, the raytracing 
 
 ## Control
 
-TODO
+### Robust Path Following Using P-control
+
+
+<!-- Path Follower  -->
+<div class="multicol-col-2">
+  <img alt="Moving Gif of the path follower software in simulation."
+  style="width: 90%"
+       src="{{ site.baseurl }}/assets/images/lab5/gazebo_sim_path_follow.gif" />
+</div>
+
+
+Following the specifications for `Lab 5B`, we implemented a proportional controller that follows a path of waypoints based on localization information available to the robot. This controller is passed a message of type `nav_msgs/Path` containing a set of global waypoints for the robot to traverse in order. However, since we expect that our higher level path-planning navigation system will take some time to run, we designed our path follower node to seamlessly deal with path messages that arrive sporadically or delayed. To the left, you can see a GIF of this path-following node in action using odometry information from Gazebo internals.
+
+To accomplish this, our path follower node maintains an internal state consisting of `current_path` and `next_waypoint_index`. Using these two internal state variables, the path follower node can determine when a received path message is new and also which waypoint the robot should proceed to first along the waypoint path.
+
+This last part is especially important if the robot is traveling at speed when a new path arrives at the path follower node. Under this condition, the robot is very likely to receive a path where the first waypoint is already behind the robot and should therefore be ignored.
+
+
+### Testing Path Following Using Gazebo
+
+<!-- Insert gif of derpy odom -->
+<div class="multicol-col-2">
+  <img alt="Moving Gif of the path follower software in simulation."
+  style="width: 90%"
+       src="{{ site.baseurl }}/assets/images/lab5/gazebo_odom.gif" />
+</div>
+
+To test our path planner, we wanted to be able to run our path planning software in the Gazebo simulation environment. However, since the stock `racecar_simulator` code does not support odometry output for the robot, we tried pulling in patch `a05d4c8` from upstream. However, this odometry patch was a breaking change caused by overconstraints caused by the addition to a `libgazebo_ros_planar_move` motion controller to the existing `Ackermann` based control system. This control contention caused some pretty hilarious consequences (see the GIF on the left, taking careful note of the position of the car's font wheels).
+
+To fix this problem, we reverted the upstream commit `a05d4c8` and created an odometry node that takes in information from Gazebo internals and outputs odometry information on topic `/odom` (see figure below). Using this new node, odometry now functions as expected in Gazebo, allowing us to create a path follower that allows the robot to traverse the entire tunnel system in simulation.
+
 
 ---
 
@@ -127,7 +186,7 @@ We settled on the last option, which results in C code like:
 ```C
 void calc_line(int8_t* map, size_t xlen, size_t ylen, size_t sx, size_t sy, size_t *tx, size_t *ty) { ... }
 ```
-And the somewhat messy python wrapper to call this function from python: 
+And the somewhat messy python wrapper to call this function from python:
 
 ```python
 from ctypes import *
@@ -177,5 +236,3 @@ The results of the above optimizations are summarized below
   * https://github.mit.edu/racecar/vesc/pull/3
   * https://github.mit.edu/racecar/racecar/pull/15
   * https://github.mit.edu/racecar/racecar_simulator/pull/6
-
-
