@@ -1,0 +1,9 @@
+---
+layout:     post
+title:      "Lab 6 Slides"
+categories: slides
+---
+
+<iframe src="https://docs.google.com/presentation/d/16YRpW6PNl-LFWHX1T34owAKJK-qie01F8kQsjy8kLJE/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+The PDF of the slides can be found <a href="https://docs.google.com/presentation/d/16YRpW6PNl-LFWHX1T34owAKJK-qie01F8kQsjy8kLJE/export/pdf">[here].</a>
