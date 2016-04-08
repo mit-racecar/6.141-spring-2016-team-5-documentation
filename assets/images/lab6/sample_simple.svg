@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 2 2" preserveAspectRatio="xMidYMid meet">
+	<rect id="bounds" x="-0.375" y="-0.375" width="0.75" height="0.75"
+		fill="rgba(255, 255, 0, 0.25)"
+		stroke="rgb(255, 255, 0)" stroke-width="0.01" />
+	<circle id="circle" r="0.25"
+		fill="none"
+		stroke="gray" stroke-width="0.01" />
+	<circle id="origin" r="0.025" transform="translate(-0.15, -0.2)"
+		fill="red" cursor="move">
+		<title>Start location</title>
+	</circle>
+	<circle id="goal" r="0.025" transform="translate(0.15, 0.2)"
+		fill="green" cursor="move">
+		<title>End location</title>
+	</circle>
+
+	<script type="text/ecmascript">
+	<![CDATA[
+	var svg = document.rootElement;
+
+	// get elements
+	var origin = document.getElementById('origin');
+	var goal = document.getElementById('goal');
+	var circle = document.getElementById('circle');
+	var bounds = document.getElementById('bounds');
+
+	// Get point in global SVG space
+	var cursorPoint = function(evt) {
+		var pt = svg.createSVGPoint();
+		pt.x = evt.clientX; pt.y = evt.clientY;
+		return pt.matrixTransform(svg.getScreenCTM().inverse());
+	};
+
+	// get position of element in viewport space
+	var positionOf = function(elem) {
+		return svg.createSVGPoint()
+			.matrixTransform(elem.getCTM())
+			.matrixTransform(svg.getScreenCTM().inverse());
+	};
+
+	// set position of element, assuming no parent group
+	var setPosition = function(elem, pt) {
+		elem.setAttribute("transform",
+			"translate(" + pt.x + "," + pt.y + ")");
+	};
+
+	// recalculate the circle and bounding box
+	var redraw = function() {
+		var originP = positionOf(origin);
+		var goalP = positionOf(goal);
+		var dx = originP.x - goalP.x;
+		var dy = originP.y - goalP.y;
+		r = 0.5 * Math.sqrt(dx*dx + dy*dy);
+
+		var c = svg.createSVGPoint();
+		c.x = 0.5 * (originP.x + goalP.x);
+		c.y = 0.5 * (originP.y + goalP.y);
+		setPosition(circle, c);
+		circle.setAttribute('r', r);
+
+		var rb = 1.5*r;
+		bounds.setAttribute('width', 2*rb);
+		bounds.setAttribute('height', 2*rb);
+		bounds.setAttribute('x', -rb);
+		bounds.setAttribute('y', -rb);
+		setPosition(bounds, c);
+	};
+
+	var dragging = null;
+	var dragOrigin = null;
+	var startPos = null
+	var mDown = function(e) {
+		if (e.target != origin && e.target != goal) return;
+
+		dragging = e.target;
+		dragOrigin = cursorPoint(e);
+		startPos = positionOf(dragging);
+	};
+	var mMove = function(e) {
+		if(!dragging) return;
+		var at = cursorPoint(e);
+
+		var pt = svg.createSVGPoint();
+		pt.x = startPos.x + at.x - dragOrigin.x;
+		pt.y = startPos.y + at.y - dragOrigin.y;
+		setPosition(dragging, pt);
+		redraw();
+	};
+	var mUp = function(e) {
+		dragging = null;
+	};
+
+	document.addEventListener('mousedown', mDown);
+	document.addEventListener('mousemove', mMove);
+	document.addEventListener('mouseup', mUp);
+
+	redraw();
+	]]>
+	</script>
+</svg>
