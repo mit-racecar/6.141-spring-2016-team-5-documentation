@@ -34,6 +34,8 @@ There are four key parts to a Rapidly-expanding Random Tree planner:
 
 We started by writing the core algorithm that wraps these four operations as an abstract class (using pythons `abc` module), which allowed us to swap out these functions without rewriting the entire RRT each time.
 
+For the purpose of testing our algorithm, we reused the map file from lab5 that we recorded of one of the RLE corridors, and added some extra dark rectangles that correspond to the size of a cone. These were arranged mostly randomly, but we made sure to include a pathological case of a wall of cones to test the algorithm
+
 ### A simple RRT
 
 For a simply RRT, we filled out these key parts as:
@@ -45,9 +47,11 @@ For a simply RRT, we filled out these key parts as:
 3. `extend` - Linear interpolate up to 0.5m towards the goal, stopping early if the line hits a wall
 4. `done` - Stop if the distance to the goal is less than 0.1m
 
+The result of running this algorithm is shown below:
 
 ![a visualization of the simple rrt]({{ site.baseurl }}/assets/images/lab6/simple_rrt.png)
 
+The red arrows show the attempted paths, and the green chain of arrows the solution path. Note that the solution found cuts through the wall, because we are modelling the car as a point, and not doing full collision detection. Also, some of the corners this generates are very sharp, which is not so viable for an ackermann-steered car
 
 ### Modelling the car more accurately
 
@@ -63,10 +67,16 @@ For a simply RRT, we filled out these key parts as:
 3. `extend` - _Spherically_ interpolate up to 0.25m along the arc found in the distance function, stopping early if _any part of the car_ would be intersecting a wall
 4. `done` - As before
 
+This algorithm takes much more time to run, so we made sure to visualize it as it was running. Here, the yellow dot shows an example of a point that is being considered from the `sample` phase.
+
 ![The start of the complex rrt]({{ site.baseurl }}/assets/images/lab6/complex_rrt_1.png)
+Immediately, we can see that the paths we are finding respect the constraints imposed by an ackermann trajectory.
 ![The next step]({{ site.baseurl }}/assets/images/lab6/complex_rrt_2.png)
+After a while longer, the tree expands into most of the large empty regions.
 ![The next step]({{ site.baseurl }}/assets/images/lab6/complex_rrt_3.png)
+We get stuck against the wall of cones for quite some time, as we require a 3-point turn to turn around the top of the wall.
 ![The next step]({{ site.baseurl }}/assets/images/lab6/complex_rrt_4.png)
+40 minutes later, a viable path is found.
 ![The final path of the rrt]({{ site.baseurl }}/assets/images/lab6/complex_rrt.png)
 
 ### Updating the `path_follower` for usage with RRT
