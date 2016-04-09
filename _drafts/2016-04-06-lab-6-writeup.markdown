@@ -3,12 +3,17 @@ layout:     post
 title:      "Lab 6 Writeup"
 categories: writeups
 cover:      /assets/images/lab6/complex_rrt.png
-published:  false
 ---
 
 <!-- TODO: introduction -->
 
 <!--more-->
+
+## Table of Contents
+{:.no_toc}
+
+* This list element is automatically replaced with the TOC
+{:toc}
 
 ## Selecting a Mapping Strategy
 
@@ -38,7 +43,7 @@ For the purpose of testing our algorithm, we reused the map file from lab5 that 
 
 ### A simple RRT
 
-For a simply RRT, we filled out these key parts as:
+For a simple RRT, we filled out these key parts as:
 
 1. `sample`:
   * With a $$\frac{1}{20}$$ chance, choose the goal location
@@ -61,7 +66,7 @@ The red arrows show the attempted paths, and the green chain of arrows the solut
 1. `sample`
   * With a $$\frac{1}{20}$$ chance, choose the goal location
   * With a $$\frac{1}{4}$$ chance, choose a random _free_ point from the bounding box between the goal and the nearest point on the tree so far, defined in the same way as in the other RRT
-  * Otherwise, choose a random free point using the same rules as before <!-- insert diagram, possibly inline svg --> 
+  * Otherwise, choose a random free point using the same rules as before <!-- insert diagram, possibly inline svg -->
 2. `distance`
    Return the length of the shortest circular arc connecting the existing point to the new one. If such an arc would be too tight for the car to follow, return $$\infty$$
 3. `extend` - _Spherically_ interpolate up to 0.25m along the arc found in the distance function, stopping early if _any part of the car_ would be intersecting a wall
@@ -80,5 +85,9 @@ We get stuck against the wall of cones for quite some time, as we require a 3-po
 ![The final path of the rrt]({{ site.baseurl }}/assets/images/lab6/complex_rrt.png)
 
 ### Updating the `path_follower` for usage with RRT
-<!-- Assigned to Winterg --> 
+<!-- Assigned to Winterg -->
 
+For optimal usage of the RRT, our `path_follower` node needed to be improved in the following ways:
+* The path_follower node should be able to report the status of execution of the current path to the RRT.
+* It should also be able to drive backwards
+* Lastly, the `path_follower` should be able to tell the RRT when something bad (such as an E-stop event) has happened and that the RRT should forcibly replan a path from the cars current location.
