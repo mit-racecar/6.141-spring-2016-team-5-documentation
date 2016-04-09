@@ -899,6 +899,14 @@ body:not(.post-template) .post-title {
     margin: 0 -12.5%;
 }
 
+/* For the homepage, fix images to be 100% the width of the column at max. */
+.post-excerpt .full-img {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    padding: 0.6em 0;
+}
+
 /* The author credit area after the post */
 .post-footer {
     position: relative;
