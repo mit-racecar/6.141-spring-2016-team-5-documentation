@@ -92,6 +92,9 @@ We get stuck against the wall of cones for quite some time, as we require a 3-po
 <!-- Assigned to Winterg -->
 
 For optimal usage of the RRT, our `path_follower` node needed to be improved in the following ways:
+
 * The path_follower node should be able to report the status of execution of the current path to the RRT.
-* It should also be able to drive backwards
-* Lastly, the `path_follower` should be able to tell the RRT when something bad (such as an E-stop event) has happened and that the RRT should forcibly replan a path from the cars current location.
+* It should also be able to drive backwards since RRTs can output paths that require the robot to reverse.
+* *(Optional)* the `path_follower` should be able to tell the RRT when something bad (such as an E-stop event) has happened and that the RRT should forcibly replan a path from the car's current location.
+
+To allow for our RRT algorithm to create optimal paths, we assumed that our RRT would only give a small portion of the path to execute at a time. This way, our RRT could use the time that the robot is executing the path to optimize the remaining portion of the path. Under this design choice, allowing our `path_follower` to report its execution progress was simple. The `path_follower` node simply published the topic `/lab6/path_follower/execution/complete` and sent a `Header` message whenever the node had finished executing the given path.
