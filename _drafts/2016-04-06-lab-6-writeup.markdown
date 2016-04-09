@@ -7,6 +7,10 @@ cover:      /assets/images/lab6/complex_rrt.png
 
 <!-- TODO: introduction -->
 
+Our goal for this lab was to create a path planning algorithm that could navigate the robot down a corridor whilst avoiding obstacles. To achieve this, our team implemented a Rapidly-exploring Random Tree (RRT) algorithm and made modifications to our previous path following algorithm. Our final results were that we were able to drive down a hallway in the Gazebo simulator using a pre-recorded map-file.
+
+![The robot following a RRT-generated path in sumulation]({{ site.baseurl }}/assets/images/lab6/path_follow_rrt.png)
+
 <!--more-->
 
 ## Table of Contents
