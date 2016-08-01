@@ -1,7 +1,15 @@
+# ITEMS THAT SHOULD BE EDITED FOR FORKED REPOS
 name: "MIT 6.141 Team 5 Project Blog"
 description: "For MIT's Robotics: Science & Systems class"
 meta_description: "MIT 6.141 Team 5 Project Blog"
+# baseurl: '/<repo_name>'
+baseurl: '/6.141-spring-2016-team-5-documentation'
+# domain_name: 'https://<repo_owner_username>.github.io'
+domain_name: 'https://mit-racecar.github.io'
+author:         'Team 5'
+author_bio:     "MIT's 6.141 Team 5 is driven by the following motley assortment of undergraduate student hackers, coders, and EE wizards:<br>Eric Wieser, Ernie Ho, Shi-Ke Xue, Miles Steele, Steven Homberg, and Winter Guerra."
 
+# DO NOT EDIT THE REST OF THESE PARAMETERS
 markdown: kramdown
 kramdown:
   input: GFM
@@ -10,13 +18,8 @@ kramdown:
 highlighter: rouge
 logo: false
 paginate: 15
-baseurl: '/pages/rss2016-team5'
-domain_name: 'https://github.mit.edu'
 gems: [jekyll-paginate]
 
 # Details for the RSS feed generator
 url:            'blog url'
-author:         'Team 5'
-author_bio:     "MIT's 6.141 Team 5 is driven by the following motley assortment of undergraduate student hackers, coders, and EE wizards:<br>Eric Wieser, Ernie Ho, Shi-Ke Xue, Miles Steele, Steven Homberg, and Winter Guerra."
-
 excerpt_separator: <!--more-->
